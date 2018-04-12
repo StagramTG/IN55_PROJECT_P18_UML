@@ -1,0 +1,14 @@
+window_sizes 958 1048 250 703 896 104
+
+diagrams
+  active  classdiagram_ref 128002 // Basic
+    703 896 100 A3 0 0
+end
+show_stereotypes
+selected operation_ref 128258 // render
+open
+  class_ref 128258 // Node
+  class_ref 129026 // Renderable
+  class_ref 129154 // Updatable
+end
+end
