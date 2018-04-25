@@ -1,8 +1,8 @@
-window_sizes 958 1048 326 625 882 104
+window_sizes 1920 1046 326 1587 880 104
 
 diagrams
   active  classdiagram_ref 128002 // Basic
-    625 882 100 A3 0 0
+    1587 880 100 A3 0 0
 end
 show_stereotypes
 selected operation_ref 136066 // setUniformMat4

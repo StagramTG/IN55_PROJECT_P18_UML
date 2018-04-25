@@ -1,6 +1,6 @@
 format 217
 "Analysis"
-  revision 2
+  revision 3
   modified_by 2 "tgred"
 
 
@@ -97,13 +97,12 @@ ${inlines}
       explicit_switch_type ""
       mysql_decl ""
       
-      classrelation 129026 // nodes (<unidirectional association>)
+      classrelation 129026 // root_node (<unidirectional association>)
 	relation 128642 --->
-	  stereotype "vector"
-	  a role_name "nodes" multiplicity "*" private
-	    cpp default "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${stereotype}<${type} *> ${name}${value};
+	  a role_name "root_node" multiplicity "1" private
+	    cpp default "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} * ${name}${value};
 "
-	    classrelation_ref 129026 // nodes (<unidirectional association>)
+	    classrelation_ref 129026 // root_node (<unidirectional association>)
 	  b parent class_ref 128258 // Node
       end
 
@@ -137,12 +136,13 @@ ${inlines}
       explicit_switch_type ""
       mysql_decl ""
       
-      classrelation 129154 // <unidirectional association>
+      classrelation 129154 // children (<unidirectional association>)
 	relation 128770 --->
-	  a role_name "" private
-	    cpp default "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} * ${name}${value};
+	  stereotype "vector"
+	  a role_name "children" multiplicity "*" private
+	    cpp default "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${stereotype}<${type} *> ${name}${value};
 "
-	    classrelation_ref 129154 // <unidirectional association>
+	    classrelation_ref 129154 // children (<unidirectional association>)
 	  b parent class_ref 128258 // Node
       end
 
@@ -160,6 +160,15 @@ ${inlines}
 	    cpp default "${type}"
 	    classrelation_ref 129794 // <realization>
 	  b parent class_ref 129026 // Renderable
+      end
+
+      classrelation 136706 // parent (<unidirectional association>)
+	relation 136322 --->
+	  a role_name "parent" multiplicity "0..1" private
+	    cpp default "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} * ${name}${value};
+"
+	    classrelation_ref 136706 // parent (<unidirectional association>)
+	  b parent class_ref 128258 // Node
       end
     end
 
@@ -593,6 +602,59 @@ ${inlines}
       explicit_switch_type ""
       mysql_decl ""
       
+    end
+
+    class 136322 "ModelGui"
+      visibility package 
+      cpp_decl "${comment}${template}class ${name}${inherit} {
+${members}};
+${inlines}
+"
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 136578 // <generalisation>
+	relation 136194 ---|>
+	  a public
+	    cpp default "${type}"
+	    classrelation_ref 136578 // <generalisation>
+	  b parent class_ref 128642 // Model
+      end
+    end
+
+    class 136450 "Sprite"
+      visibility package 
+      cpp_decl "${comment}${template}class ${name}${inherit} {
+${members}};
+${inlines}
+"
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 136834 // <generalisation>
+	relation 136450 ---|>
+	  a public
+	    cpp default "${type}"
+	    classrelation_ref 136834 // <generalisation>
+	  b parent class_ref 128258 // Node
+      end
+
+      classrelation 136962 // model (<directional composition>)
+	relation 136578 *-->
+	  a role_name "model" multiplicity "1" private
+	    cpp default "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	    classrelation_ref 136962 // model (<directional composition>)
+	  b parent class_ref 136322 // ModelGui
+      end
     end
   end
 end
