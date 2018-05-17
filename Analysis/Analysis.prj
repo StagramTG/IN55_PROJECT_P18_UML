@@ -1,6 +1,6 @@
-format 217
+format 218
 "Analysis"
-  revision 3
+  revision 4
   modified_by 2 "tgred"
 
 
@@ -8,7 +8,7 @@ format 217
   // class settings
   default_attribute_visibility private default_relation_visibility private default_operation_visibility public
   
-  classdiagramsettings draw_all_relations yes hide_attributes no hide_operations no hide_getset_operations no show_members_full_definition no show_members_visibility no show_members_stereotype no show_members_context no show_members_multiplicity no show_members_initialization no show_attribute_modifiers no member_max_width 127 show_parameter_dir yes show_parameter_name yes package_name_in_tab no class_drawing_mode natural drawing_language uml show_context_mode no auto_label_position yes show_relation_modifiers no show_relation_visibility no show_infonote no shadow yes gradient none show_stereotype_properties no end
+  classdiagramsettings draw_all_relations yes hide_attributes no hide_operations no hide_getset_operations no hide_ports no show_members_full_definition no show_members_visibility no show_members_stereotype no show_members_context no show_members_multiplicity no show_members_initialization no show_attribute_modifiers no member_max_width 127 show_parameter_dir yes show_parameter_name yes package_name_in_tab no class_drawing_mode natural drawing_language uml show_context_mode no auto_label_position yes show_relation_modifiers no show_relation_visibility no show_infonote no shadow yes gradient none show_stereotype_properties no end
   
   usecasediagramsettings package_name_in_tab no show_context_mode no auto_label_position yes draw_all_relations yes class_drawing_mode actor shadow yes gradient none show_stereotype_properties no end
   
@@ -57,8 +57,8 @@ format 217
     activitydiagramsettings
      end
     classdiagram 128002 "Basic"
-      classdiagramsettings member_max_width 0 end
-      size A3
+      classdiagramsettings draw_all_relations no member_max_width 0 end
+      size A3-Landscape
     end
 
     class 128002 "Window"
@@ -74,12 +74,22 @@ ${inlines}
       explicit_switch_type ""
       mysql_decl ""
       
-      classrelation 129282 // <unidirectional association>
+      classrelation 129282 // currentScene (<unidirectional association>)
 	relation 128898 --->
-	  a role_name "" private
+	  a role_name "currentScene" multiplicity "1" private
 	    cpp default "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} * ${name}${value};
 "
-	    classrelation_ref 129282 // <unidirectional association>
+	    classrelation_ref 129282 // currentScene (<unidirectional association>)
+	  b parent class_ref 128130 // Scene
+      end
+
+      classrelation 143490 // scenes (<unidirectional association>)
+	relation 143106 --->
+	  stereotype "vector"
+	  a role_name "scenes" multiplicity "1..*" private
+	    cpp default "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${stereotype}<${type} *> ${name}${value};
+"
+	    classrelation_ref 143490 // scenes (<unidirectional association>)
 	  b parent class_ref 128130 // Scene
       end
     end
@@ -121,6 +131,7 @@ ${inlines}
 	    classrelation_ref 129538 // <realization>
 	  b parent class_ref 129154 // Updatable
       end
+
     end
 
     class 128258 "Node"
@@ -225,6 +236,13 @@ ${inlines}
       explicit_switch_type ""
       mysql_decl ""
       
+      classrelation 143746 // <generalisation>
+	relation 143362 ---|>
+	  a public
+	    cpp default "${type}"
+	    classrelation_ref 143746 // <generalisation>
+	  b parent class_ref 128258 // Node
+      end
     end
 
     class 128770 "ModelTextured"
@@ -543,6 +561,13 @@ ${inlines}
       explicit_switch_type ""
       mysql_decl ""
       
+      classrelation 143874 // <generalisation>
+	relation 143490 ---|>
+	  a public
+	    cpp default "${type}"
+	    classrelation_ref 143874 // <generalisation>
+	  b parent class_ref 128258 // Node
+      end
     end
 
     class 129538 "CameraPerspective"

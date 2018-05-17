@@ -1,13 +1,12 @@
-window_sizes 1920 1046 326 1587 880 104
+window_sizes 1920 1027 326 1589 877 104
 
 diagrams
   active  classdiagram_ref 128002 // Basic
-    1587 880 100 A3 0 0
+    1589 877 100 A3-Landscape 0 0
 end
 show_stereotypes
-selected operation_ref 136066 // setUniformMat4
+selected class_ref 128130 // Scene
 open
-  class_ref 128258 // Node
   class_ref 129282 // ShaderProgam
 end
 end
