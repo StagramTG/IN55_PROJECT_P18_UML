@@ -1,3 +1,5 @@
+![UML basique du projet](uml_simple.png)
+
 Eléments nécessaires :
 
 	+ Window :
