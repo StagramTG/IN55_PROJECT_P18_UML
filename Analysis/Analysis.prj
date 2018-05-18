@@ -1,7 +1,7 @@
 format 218
 "Analysis"
-  revision 4
-  modified_by 2 "tgred"
+  revision 5
+  modified_by 2 "jerem"
 
 
   
@@ -131,7 +131,6 @@ ${inlines}
 	    classrelation_ref 129538 // <realization>
 	  b parent class_ref 129154 // Updatable
       end
-
     end
 
     class 128258 "Node"
@@ -242,6 +241,18 @@ ${inlines}
 	    cpp default "${type}"
 	    classrelation_ref 143746 // <generalisation>
 	  b parent class_ref 128258 // Node
+      end
+
+      classrelation 150914 // skeleton (<composition>)
+	relation 150274 *---
+	  a role_name "skeleton" multiplicity "1" private
+	    cpp default "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	    classrelation_ref 150914 // skeleton (<composition>)
+	  b role_name "" private
+	    cpp default "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	    classrelation_ref 151042 // <composition>
       end
     end
 
@@ -679,6 +690,84 @@ ${inlines}
 "
 	    classrelation_ref 136962 // model (<directional composition>)
 	  b parent class_ref 136322 // ModelGui
+      end
+    end
+
+    class 142978 "Skeleton"
+      visibility package 
+      cpp_decl "${comment}${template}class ${name}${inherit} {
+${members}};
+${inlines}
+"
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 150402 // bones (<composition>)
+	relation 150018 *---
+	  a role_name "bones" multiplicity "*" private
+	    cpp default "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${stereotype}<${type}> ${name}${value};
+"
+	    classrelation_ref 150402 // bones (<composition>)
+	  b role_name "" private
+	    cpp default "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	    classrelation_ref 150530 // <composition>
+      end
+
+      classrelation 151042 // <composition>
+	relation_ref 150274 // <composition>
+      end
+    end
+
+    class 143106 "Bone"
+      visibility package 
+      cpp_decl "${comment}${template}class ${name}${inherit} {
+${members}};
+${inlines}
+"
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 150530 // <composition>
+	relation_ref 150018 // <composition>
+      end
+
+      classrelation 150658 // joints (<composition>)
+	relation 150146 *---
+	  a role_name "joints" multiplicity "*" private
+	    cpp default "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${stereotype}<${type}> ${name}${value};
+"
+	    classrelation_ref 150658 // joints (<composition>)
+	  b role_name "" private
+	    cpp default "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	    classrelation_ref 150786 // <composition>
+      end
+    end
+
+    class 143234 "Joint"
+      visibility package 
+      cpp_decl "${comment}${template}class ${name}${inherit} {
+${members}};
+${inlines}
+"
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 150786 // <composition>
+	relation_ref 150146 // <composition>
       end
     end
   end
